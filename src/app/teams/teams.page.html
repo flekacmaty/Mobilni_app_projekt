@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Výpis týmů
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Výpis týmů</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let team of hockeyTeams">
+      <ion-label>
+        <h2>{{ team.name }}</h2>
+        <p>{{ team.country }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
