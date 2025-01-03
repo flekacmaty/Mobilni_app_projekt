@@ -14,10 +14,15 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let team of hockeyTeams">
+    <ion-item *ngFor="let team of hockeyTeams" (click)="goToDetail(team)">
+      <ion-thumbnail slot="start">
+        <img [src]="team.logo" alt="{{ team.name }} Logo">
+      </ion-thumbnail>
       <ion-label>
         <h2>{{ team.name }}</h2>
         <p>{{ team.country }}</p>
+        <p>Rok založení: {{ team.founded }}</p>
+        <p>{{ team.description }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
