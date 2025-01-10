@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { favoritesPage } from './favorites.page';
+import { FavoritesPage } from './favorites.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { favoritesPageRoutingModule } from './favorites-routing.module';
@@ -15,6 +15,6 @@ import { favoritesPageRoutingModule } from './favorites-routing.module';
     ExploreContainerComponentModule,
     favoritesPageRoutingModule
   ],
-  declarations: [favoritesPage]
+  declarations: [FavoritesPage]
 })
 export class favoritesPageModule {}

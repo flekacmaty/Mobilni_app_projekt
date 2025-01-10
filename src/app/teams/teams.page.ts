@@ -11,20 +11,21 @@ import { TeamsService } from '../services/teams.service';
 export class TeamsPage implements OnInit {
 
   public hockeyTeams: any[] = [];
+  public favoriteTeams: any[] = [];
 
   constructor(private router: Router, private teamsService: TeamsService) { }
 
   async ngOnInit() {
     console.log('TeamsPage initialized');
     await this.loadTeams();
+    await this.loadFavoriteTeams();
   }
 
   async loadTeams() {
     console.log('Loading teams from service');
     this.hockeyTeams = await this.teamsService.getTeams();
     console.log('Current teams:', this.hockeyTeams);
-    
-    // Pokud Storage je prázdný, inicializuj s předdefinovanými týmy
+
     if (this.hockeyTeams.length === 0) {
       console.log('Initializing default teams');
       this.hockeyTeams = [
@@ -67,7 +68,22 @@ export class TeamsPage implements OnInit {
     }
   }
 
-  goToDetail(team: any) {
-    this.router.navigate(['/tabs/team-detail', team.id]);
+  async loadFavoriteTeams() {
+    console.log('Loading favorite teams from storage');
+    this.favoriteTeams = await this.teamsService.getFavoriteTeams();
+    console.log('Current favorite teams:', this.favoriteTeams);
   }
+
+  async toggleFavorite(team: any) {
+    await this.teamsService.toggleFavoriteTeam(team);
+  
+    this.favoriteTeams = await this.teamsService.getFavoriteTeams();
+  
+    console.log(`${team.name} byl přidán/odebrán z oblíbených.`);
+  }
+
+  isFavorite(team: any): boolean {
+    return this.favoriteTeams.some(favTeam => favTeam.id === team.id);
+  }
+  
 }

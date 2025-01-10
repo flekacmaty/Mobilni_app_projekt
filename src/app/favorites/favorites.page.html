@@ -13,4 +13,22 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list *ngIf="favoriteTeams.length > 0; else noFavorites">
+    <ion-item *ngFor="let team of favoriteTeams">
+      <ion-avatar slot="start">
+        <img [src]="team.logo" alt="{{ team.name }} logo">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ team.name }}</h2>
+        <p>{{ team.country }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noFavorites>
+    <ion-text class="ion-padding">
+      <h2>Nemáte žádné oblíbené týmy.</h2>
+      <p>Přidejte si nějaké týmy do oblíbených na stránce Týmy.</p>
+    </ion-text>
+  </ng-template>
 </ion-content>

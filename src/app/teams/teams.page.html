@@ -14,17 +14,21 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let team of hockeyTeams" (click)="goToDetail(team)">
-      <ion-thumbnail slot="start">
-        <img [src]="team.logo" alt="{{ team.name }} Logo">
-      </ion-thumbnail>
+    <ion-item *ngFor="let team of hockeyTeams">
+      <ion-avatar slot="start">
+        <img [src]="team.logo" alt="{{ team.name }} logo">
+      </ion-avatar>
       <ion-label>
         <h2>{{ team.name }}</h2>
         <p>{{ team.country }}</p>
-        <p>Rok založení: {{ team.founded }}</p>
-        <p>{{ team.description }}</p>
       </ion-label>
+      <ion-icon 
+        [name]="isFavorite(team) ? 'star' : 'star-outline'" 
+        (click)="toggleFavorite(team)" 
+        slot="end" 
+        color="primary" 
+        style="cursor: pointer;">
+      </ion-icon>
     </ion-item>
-  </ion-list>
-
+  </ion-list>  
 </ion-content>
