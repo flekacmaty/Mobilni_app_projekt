@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TeamsService } from '../services/teams.service';
+import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-favorites',
@@ -7,13 +8,14 @@ import { TeamsService } from '../services/teams.service';
   styleUrls: ['favorites.page.scss'],
   standalone: false,
 })
-export class FavoritesPage implements OnInit {
+export class FavoritesPage implements ViewWillEnter {
   public favoriteTeams: any[] = [];
 
   constructor(private teamsService: TeamsService) {}
 
-  async ngOnInit() {
-    console.log('FavoritesPage initialized');
+  // Tento hook se volá při každém vstupu na stránku
+  async ionViewWillEnter() {
+    console.log('FavoritesPage will enter');
     await this.loadFavoriteTeams();
   }
 
