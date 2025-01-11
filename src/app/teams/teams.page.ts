@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamsService } from '../services/teams.service';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-teams',
@@ -14,6 +15,7 @@ export class TeamsPage implements OnInit {
   public filteredTeams: any[] = [];
   public favoriteTeams: any[] = [];
   public searchTerm: string = '';
+  public currentLocation: any = null;
 
   constructor(private router: Router, private teamsService: TeamsService) { }
 
@@ -21,6 +23,48 @@ export class TeamsPage implements OnInit {
     console.log('TeamsPage initialized');
     await this.loadTeams();
     await this.loadFavoriteTeams();
+    await this.getCurrentLocation();
+  }
+
+  async getCurrentLocation() {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      this.currentLocation = position.coords;
+      console.log('Current location:', this.currentLocation);
+    } catch (error) {
+      console.error('Error getting location', error);
+    }
+  }
+
+  // Funkce pro výpočet vzdálenosti mezi dvěma body (v metrech)
+  calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+    const toRadians = (degrees: number) => degrees * (Math.PI / 180);
+    const R = 6371; // Poloměr Země v km
+    const dLat = toRadians(lat2 - lat1);
+    const dLng = toRadians(lng2 - lng1);
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * 
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c * 1000; // Vzdálenost v metrech
+    return distance;
+  }
+
+  // Funkce pro zobrazení detailů stadionu a vzdálenosti
+  showStadiumDetails(stadium: any) {
+    if (this.currentLocation) {
+      const distance = this.calculateDistance(
+        this.currentLocation.latitude,
+        this.currentLocation.longitude,
+        stadium.coordinates.lat,
+        stadium.coordinates.lng
+      );
+      console.log(`Stadion: ${stadium.name}, Vzdálenost: ${distance.toFixed(2)} m`);
+      alert(`Stadion: ${stadium.name}\nVzdálenost: ${distance.toFixed(2)} m`);
+    } else {
+      alert('Nemohu získat aktuální polohu.');
+    }
   }
 
   async loadTeams() {
