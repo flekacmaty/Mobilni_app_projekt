@@ -30,6 +30,7 @@
       <ion-label>
         <h2>{{ team.name }}</h2>
         <p>{{ team.country }}</p>
+        <p *ngIf="team.stadium?.name"><strong>Stadion:</strong> {{ team.stadium.name }}</p> <!-- Přidána podmínka pro zobrazení pouze pokud existuje -->
       </ion-label>
       <ion-icon
         [name]="isFavorite(team) ? 'star' : 'star-outline'"
@@ -39,5 +40,6 @@
         style="cursor: pointer;"
       ></ion-icon>
     </ion-item>
+    
   </ion-list>
 </ion-content>

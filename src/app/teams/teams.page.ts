@@ -25,23 +25,155 @@ export class TeamsPage implements OnInit {
 
   async loadTeams() {
     console.log('Loading teams from service');
+    
+    // Načteme týmy z externí služby (např. API)
     this.hockeyTeams = await this.teamsService.getTeams();
     this.filteredTeams = [...this.hockeyTeams]; // Zobrazíme všechny týmy na začátku
 
+    // Pokud nejsou žádné týmy z externí služby, nastavíme výchozí týmy
     if (this.hockeyTeams.length === 0) {
-      console.log('Initializing default teams');
-      this.hockeyTeams = [
-        { id: 1, name: 'Boston Bruins', country: 'USA', logo: 'assets/logos/boston-bruins.jpg', founded: 1924, description: 'One of the Original Six teams of the NHL.' },
-        { id: 2, name: 'Toronto Maple Leafs', country: 'Canada', logo: 'assets/logos/toronto-maple-leafs.png', founded: 1917, description: 'Another Original Six team with a rich history.' },
-        { id: 3, name: 'HC Sparta Praha', country: 'Czech Republic', logo: 'assets/logos/hc-sparta-praha.jpeg', founded: 1903, description: 'A prominent team in the Czech Extraliga.' },
-        { id: 4, name: 'LA Kings', country: 'USA', logo: 'assets/logos/la-kings.png', founded: 1967, description: 'Based in Los Angeles, known for their dynamic play.' },
-      ];
-      console.log('Saving default teams to storage');
-      await this.teamsService.setTeams(this.hockeyTeams);
-      this.filteredTeams = [...this.hockeyTeams];
-      console.log('Default teams saved');
+        console.log('Initializing default teams');
+        
+        // Definujeme 10 týmu NHL, které budou "natvrdo" v seznamu
+        this.hockeyTeams = [
+            { 
+                id: 1, 
+                name: 'Boston Bruins', 
+                country: 'USA', 
+                logo: 'assets/logos/boston-bruins.jpg', 
+                founded: 1924, 
+                description: 'One of the Original Six teams of the NHL.',
+                stadium: {
+                    name: 'TD Garden',
+                    address: '100 Legends Way, Boston, MA 02114, USA',
+                    coordinates: { lat: 42.3656, lng: -71.0621 }
+                }
+            },
+            { 
+                id: 2, 
+                name: 'Toronto Maple Leafs', 
+                country: 'Canada', 
+                logo: 'assets/logos/toronto-maple-leafs.png', 
+                founded: 1917, 
+                description: 'Another Original Six team with a rich history.',
+                stadium: {
+                    name: 'Scotiabank Arena',
+                    address: '40 Bay Street, Toronto, ON M5J 2X2, Canada',
+                    coordinates: { lat: 43.6435, lng: -79.3798 }
+                }
+            },
+            { 
+                id: 3, 
+                name: 'Montreal Canadiens', 
+                country: 'Canada', 
+                logo: 'assets/logos/montreal-canadiens.png', 
+                founded: 1909, 
+                description: 'A historic NHL team with numerous championships.',
+                stadium: {
+                    name: 'Bell Centre',
+                    address: '1909 Avenue des Canadiens-de-Montréal, Montreal, QC H4B 5G0, Canada',
+                    coordinates: { lat: 45.4975, lng: -73.5795 }
+                }
+            },
+            { 
+                id: 4, 
+                name: 'New York Rangers', 
+                country: 'USA', 
+                logo: 'assets/logos/new-york-rangers.png', 
+                founded: 1926, 
+                description: 'One of the Original Six teams of the NHL.',
+                stadium: {
+                    name: 'Madison Square Garden',
+                    address: '4 Pennsylvania Plaza, New York, NY 10001, USA',
+                    coordinates: { lat: 40.7505, lng: -73.9934 }
+                }
+            },
+            { 
+                id: 5, 
+                name: 'Chicago Blackhawks', 
+                country: 'USA', 
+                logo: 'assets/logos/chicago-blackhawks.png', 
+                founded: 1926, 
+                description: 'A successful NHL franchise based in Chicago.',
+                stadium: {
+                    name: 'United Center',
+                    address: '1901 W Madison St, Chicago, IL 60612, USA',
+                    coordinates: { lat: 41.8807, lng: -87.6742 }
+                }
+            },
+            { 
+                id: 6, 
+                name: 'Detroit Red Wings', 
+                country: 'USA', 
+                logo: 'assets/logos/detroit-red-wings.png', 
+                founded: 1926, 
+                description: 'A team with a rich history in the NHL.',
+                stadium: {
+                    name: 'Little Caesars Arena',
+                    address: '2645 Woodward Ave, Detroit, MI 48201, USA',
+                    coordinates: { lat: 42.3417, lng: -83.0550 }
+                }
+            },
+            { 
+                id: 7, 
+                name: 'Pittsburgh Penguins', 
+                country: 'USA', 
+                logo: 'assets/logos/pittsburgh-penguins.png', 
+                founded: 1967, 
+                description: 'A dynamic team with multiple Stanley Cup championships.',
+                stadium: {
+                    name: 'PPG Paints Arena',
+                    address: '1001 Fifth Ave, Pittsburgh, PA 15219, USA',
+                    coordinates: { lat: 40.4395, lng: -79.9930 }
+                }
+            },
+            { 
+                id: 8, 
+                name: 'Los Angeles Kings', 
+                country: 'USA', 
+                logo: 'assets/logos/la-kings.png', 
+                founded: 1967, 
+                description: 'Based in Los Angeles, known for their dynamic play.',
+                stadium: {
+                    name: 'Crypto.com Arena',
+                    address: '1111 S Figueroa St, Los Angeles, CA 90015, USA',
+                    coordinates: { lat: 34.0430, lng: -118.2673 }
+                }
+            },
+            { 
+                id: 9, 
+                name: 'San Jose Sharks', 
+                country: 'USA', 
+                logo: 'assets/logos/san-jose-sharks.png', 
+                founded: 1991, 
+                description: 'A strong team with a competitive edge in the NHL.',
+                stadium: {
+                    name: 'SAP Center',
+                    address: '525 W Santa Clara St, San Jose, CA 95113, USA',
+                    coordinates: { lat: 37.3353, lng: -121.9002 }
+                }
+            },
+            { 
+                id: 10, 
+                name: 'Washington Capitals', 
+                country: 'USA', 
+                logo: 'assets/logos/washington-capitals.png', 
+                founded: 1974, 
+                description: 'A team known for its consistency and great players.',
+                stadium: {
+                    name: 'Capital One Arena',
+                    address: '601 F Street NW, Washington, D.C. 20004, USA',
+                    coordinates: { lat: 38.8977, lng: -77.0200 }
+                }
+            },
+        ];
+
+        console.log('Saving default teams to storage');
+        await this.teamsService.setTeams(this.hockeyTeams);
+        this.filteredTeams = [...this.hockeyTeams];
+        console.log('Default teams saved');
     }
-  }
+}
 
   async loadFavoriteTeams() {
     console.log('Loading favorite teams from storage');
