@@ -67,18 +67,19 @@ export class TeamsPage implements OnInit {
     }
   }
 
+  goToTeamDetail(team: any) {
+    this.router.navigate(['/team-detail', team.name], { state: { team: team } });
+  }
+
   async loadTeams() {
     console.log('Loading teams from service');
     
-    // Načteme týmy z externí služby (např. API)
     this.hockeyTeams = await this.teamsService.getTeams();
     this.filteredTeams = [...this.hockeyTeams]; // Zobrazíme všechny týmy na začátku
 
-    // Pokud nejsou žádné týmy z externí služby, nastavíme výchozí týmy
     if (this.hockeyTeams.length === 0) {
         console.log('Initializing default teams');
         
-        // Definujeme 10 týmu NHL, které budou "natvrdo" v seznamu
         this.hockeyTeams = [
             { 
                 id: 1, 
