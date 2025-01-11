@@ -36,68 +36,68 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-/* 🌞 Výchozí světlý režim (light mode) */
 body {
-    --ion-background-color: #ffffff;
-    --ion-text-color: #000000;
-    --ion-toolbar-background: #ffffff;
-    --ion-toolbar-color: #000000;
-    --ion-item-background: #ffffff;
-    --ion-item-color: #000000;
-    --ion-tab-bar-background: #f8f8f8;
-    --ion-tab-bar-color: #000000;
-    --ion-tab-bar-color-selected: #007bff;
-  }
-  
-  /* 🌙 Tmavý režim (dark mode) */
-  body.dark {
-    --ion-background-color: #1e1e1e;
-    --ion-text-color: #ffffff;
-    --ion-toolbar-background: #2a2a2a;
-    --ion-toolbar-color: #ffffff;
-    --ion-item-background: #333333;
-    --ion-item-color: #ffffff;
-    --ion-tab-bar-background: #2a2a2a;
-    --ion-tab-bar-color: #cccccc;
-    --ion-tab-bar-color-selected: #4caf50;
-  }
-  
-  /* Styling ion-content */
-  ion-content {
-    background-color: var(--ion-background-color);
-    color: var(--ion-text-color);
-  }
-  
-  /* Styling ion-header a ion-toolbar */
-  ion-header,
-  ion-toolbar {
-    background-color: var(--ion-toolbar-background);
-    color: var(--ion-toolbar-color);
-  }
-  
-  /* Styling ion-list a ion-item */
-  ion-list {
-    background-color: var(--ion-background-color);
-  }
-  
-  ion-item {
-    background-color: var(--ion-item-background);
-    color: var(--ion-item-color);
-  }
-  
-  /* Styling tab bar (ion-tab-bar) */
-  ion-tab-bar {
-    background-color: var(--ion-tab-bar-background);
-    color: var(--ion-tab-bar-color);
-  }
-  
-  /* Styling tab buttons (ion-tab-button) */
-  ion-tab-button {
-    color: var(--ion-tab-bar-color);
-  }
-  
-  ion-tab-button.ion-selected {
-    color: var(--ion-tab-bar-color-selected);
-  }
-  
-  
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  --ion-toolbar-background: #ffffff;
+  --ion-toolbar-color: #000000;
+  --ion-item-background: #ffffff;
+  --ion-item-color: #000000;
+  --ion-tab-bar-background: #f8f8f8;
+  --ion-tab-bar-color: #000000;
+  --ion-tab-bar-color-selected: #007bff;
+  --ion-card-background: #ffffff; 
+  --ion-card-color: #000000;
+}
+
+body.dark {
+  --ion-background-color: #1e1e1e;
+  --ion-text-color: #ffffff;
+  --ion-toolbar-background: #2a2a2a;
+  --ion-toolbar-color: #ffffff;
+  --ion-item-background: #333333;
+  --ion-item-color: #ffffff;
+  --ion-tab-bar-background: #2a2a2a;
+  --ion-tab-bar-color: #cccccc;
+  --ion-tab-bar-color-selected: #4caf50;
+  --ion-card-background: #333333;
+  --ion-card-color: #ffffff;
+}
+
+ion-card {
+  background-color: var(--ion-card-background);
+  color: var(--ion-card-color);
+}
+
+ion-content {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+ion-header,
+ion-toolbar {
+  background-color: var(--ion-toolbar-background);
+  color: var(--ion-toolbar-color);
+}
+
+ion-list {
+  background-color: var(--ion-background-color);
+}
+
+ion-item {
+  background-color: var(--ion-item-background);
+  color: var(--ion-item-color);
+}
+
+ion-tab-bar {
+  background-color: var(--ion-tab-bar-background);
+  color: var(--ion-tab-bar-color);
+}
+
+ion-tab-button {
+  color: var(--ion-tab-bar-color);
+}
+
+ion-tab-button.ion-selected {
+  color: var(--ion-tab-bar-color-selected);
+}

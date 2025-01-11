@@ -34,7 +34,7 @@
         <h2>{{ team.name }}</h2>
         <p>{{ team.country }}</p>
         <p *ngIf="team.stadium?.name">
-          <strong>Stadion:</strong> 
+          <strong>Stadion: </strong> 
           <span 
             (click)="showStadiumDetails(team.stadium); $event.stopPropagation()" 
             style="cursor: pointer; text-decoration: underline;">
